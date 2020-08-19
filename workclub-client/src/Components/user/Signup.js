@@ -46,7 +46,7 @@ const Signup = () => {
     if (valid) {
       return <Redirect to='/' />;
     } else {
-      return <div>Enter valid Credentials</div>;
+      return <div>Please enter valid Credentials</div>;
     }
   };
 
@@ -104,7 +104,7 @@ const Signup = () => {
             ></input>
           </div>
         </div>
-        <div className='form-group row'>
+        <div className='form-group row '>
           <label htmlFor='inputPassword' className='col-sm-2 col-form-label'>
             Password
           </label>

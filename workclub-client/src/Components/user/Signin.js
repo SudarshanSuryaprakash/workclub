@@ -49,13 +49,7 @@ const Signin = ({ toggleActive, active }) => {
         return <Redirect to='/App' />;
       }
     } else {
-      if (!active)
-        return (
-          <div>
-            Enter Valid Credentials. Please reload the page if necessary - i
-            used local storage and didn't track loading through state
-          </div>
-        );
+      if (!active) return <div>Please enter Valid Credentials.</div>;
     }
   };
 

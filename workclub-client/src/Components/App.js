@@ -63,7 +63,7 @@ const App = ({
           }
         })}
         <Footer />
-        <button onClick={handleSignOut} className='btn btn-danger'>
+        <button onClick={handleSignOut} className='btn btn-danger bottom'>
           Sign Out
         </button>
       </React.Fragment>
