@@ -51,3 +51,10 @@ export const statusUpdateInStore = (id) => {
     payload: { id },
   };
 };
+
+export const toggleActive = (bool) => {
+  return {
+    type: 'TOGGLE_ACTIVE',
+    payload: bool,
+  };
+};

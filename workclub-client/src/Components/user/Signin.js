@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-const Signin = ({ user }) => {
+import { toggleActive } from '../../actions';
+
+const Signin = ({ toggleActive, active }) => {
   const [value, setValue] = useState({
     email: 'sudarshansprakash@gmail.com',
     password: 'password',
@@ -24,11 +26,11 @@ const Signin = ({ user }) => {
     const result = await res.json();
     if (result.user) {
       setValid(true);
-      localStorage.setItem('access', 'granted');
+      toggleActive(true);
     } else {
-      localStorage.setItem('access', 'denied');
+      toggleActive(false);
+      // localStorage.setItem('access', 'denied');
     }
-    console.log(result);
   };
 
   const handleChange = (event) => {
@@ -43,11 +45,11 @@ const Signin = ({ user }) => {
 
   const redirectUser = () => {
     if (valid) {
-      if (localStorage.getItem('access') === 'granted') {
+      if (active) {
         return <Redirect to='/App' />;
       }
     } else {
-      if (localStorage.getItem('access') === 'denied')
+      if (!active)
         return (
           <div>
             Enter Valid Credentials. Please reload the page if necessary - i
@@ -102,10 +104,9 @@ const Signin = ({ user }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.user);
   return {
-    user: state.user,
+    active: state.active,
   };
 };
 
-export default connect(mapStateToProps)(Signin);
+export default connect(mapStateToProps, { toggleActive })(Signin);

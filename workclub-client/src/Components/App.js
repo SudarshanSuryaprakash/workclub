@@ -8,9 +8,19 @@ import ContactCreator from './ContactCreator';
 import Contact from './Contact';
 import EditContact from './EditContact';
 
-import { addContactToStore, deleteContactFromStore } from '../actions';
+import {
+  addContactToStore,
+  deleteContactFromStore,
+  toggleActive,
+} from '../actions';
 
-const App = ({ addContactToStore, deleteContactFromStore, contacts }) => {
+const App = ({
+  addContactToStore,
+  deleteContactFromStore,
+  contacts,
+  toggleActive,
+  active,
+}) => {
   const addContact = (contact) => addContactToStore(contact);
 
   const deleteContact = (email) => {
@@ -60,19 +70,19 @@ const App = ({ addContactToStore, deleteContactFromStore, contacts }) => {
     );
   };
   const handleSignOut = () => {
-    localStorage.setItem('access', 'denied');
+    // localStorage.setItem('access', 'denied');
+    toggleActive(false);
     return <Redirect to='/' />;
   };
-
+  {
+    /* <Link to='/'>
+          If you tried Entering through the url area, you need to sign in. Or if
+          you signed out, you need to sign in.
+        </Link> */
+  }
   return (
     <React.Fragment>
-      {localStorage.getItem('access') === 'denied' ? (
-        <Link to='/'>
-          If you tried Entering through the url area, you need to sign in.
-        </Link>
-      ) : (
-        displayContent()
-      )}
+      {!active ? <Redirect to='/' /> : displayContent()}
     </React.Fragment>
   );
 };
@@ -80,10 +90,12 @@ const App = ({ addContactToStore, deleteContactFromStore, contacts }) => {
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts.contacts,
+    active: state.active,
   };
 };
 
 export default connect(mapStateToProps, {
   addContactToStore,
   deleteContactFromStore,
+  toggleActive,
 })(App);
