@@ -53,10 +53,16 @@ const App = ({ addContactToStore, deleteContactFromStore, contacts }) => {
           }
         })}
         <Footer />
+        <button onClick={handleSignOut} className='btn btn-danger'>
+          Sign Out
+        </button>
       </React.Fragment>
     );
   };
-  console.log(localStorage.getItem('access'));
+  const handleSignOut = () => {
+    localStorage.setItem('access', 'denied');
+    return <Redirect to='/' />;
+  };
 
   return (
     <React.Fragment>
