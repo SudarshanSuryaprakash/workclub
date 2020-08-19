@@ -1,12 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
 const PORT = 5000;
 
 const MONGO_URI =
   'mongodb+srv://Sudarshan:swW1VcoTCLbPEJmg@cluster0.qvlas.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
 require('./models/User');
+app.use(cors());
+
+// app.get('/')
 
 app.use(express.json());
 app.use(require('./Routes/auth'));
@@ -21,6 +25,6 @@ mongoose.connection.on('connected', () =>
 );
 mongoose.connection.on('error', (err) => console.log('Error:', err));
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

@@ -28,7 +28,9 @@ const ContactCreator = ({
   const submitContact = (event) => {
     event.preventDefault();
     emptyFields();
-    contactInput = { ...contactInput, editing: false };
+    contactInput.editing = false;
+    contactInput.id = new Date();
+    contactInput.status = true;
 
     onAdd(contactInput);
 

@@ -11,6 +11,12 @@ export const contactInputChange = (name, value) => {
     payload: { name, value },
   };
 };
+export const editContactInStore = (id) => {
+  return {
+    type: 'EDIT_CONTACT_IN_STORE',
+    payload: { id },
+  };
+};
 
 export const addContactToStore = (contact) => {
   return {
@@ -29,5 +35,19 @@ export const deleteContactFromStore = (email) => {
   return {
     type: 'DELETE_CONTACT_FROM_STORE',
     payload: { email },
+  };
+};
+
+export const updateContact = (fields) => {
+  return {
+    type: 'UPDATE_CONTACT',
+    payload: { fields },
+  };
+};
+
+export const statusUpdateInStore = (id) => {
+  return {
+    type: 'STATUS_UPDATE',
+    payload: { id },
   };
 };

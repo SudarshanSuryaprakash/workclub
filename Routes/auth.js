@@ -3,16 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
-const JWT_SECRET = 'mayurshingaresbdfkjbsdkfbsk';
 
 router.post(
   '/signup',
   [
     check('firstName', 'First name is required').not().isEmpty(),
     check('lastName', 'Last name is required').not().isEmpty(),
-    check('phoneNumber', 'Phone Number name is required').not().isEmpty(),
+    check('phoneNumber', 'Phone Number name is required').isNumeric(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -78,10 +76,8 @@ router.post(
         return res.status(400).json({ error: 'Invalid Credentials' });
       }
 
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET);
       const { _id, firstName, lastName, phoneNumber, email } = user;
       res.json({
-        token,
         user: { _id, firstName, lastName, phoneNumber, email },
       });
     } catch (err) {

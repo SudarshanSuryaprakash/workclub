@@ -4,30 +4,38 @@ import AirplanemodeInactiveIcon from '@material-ui/icons/AirplanemodeInactive';
 import EditIcon from '@material-ui/icons/Edit';
 import { connect } from 'react-redux';
 
+import { editContactInStore, statusUpdateInStore } from '../actions';
+
 const Contact = ({
-  editing,
-  index,
-  onEdit,
+  id,
   firstName,
   lastName,
   email,
   phoneNumber,
   onDelete,
-  contacts,
+  editContactInStore,
+  statusUpdateInStore,
+  status,
 }) => {
   const handleClickDelete = () => {
     onDelete(email);
   };
 
   const handleEdit = () => {
-    console.log(editing);
-    contacts[index].editing = true;
-    onEdit(index);
-    console.log(contacts);
+    editContactInStore(id);
   };
 
+  const handleStatus = () => {
+    statusUpdateInStore(id);
+  };
+
+  const showInactive = () => (status === false ? <h1>INACTIVE</h1> : null);
+  const contactClassName = () =>
+    status === false ? 'contact inactive' : 'contact';
+
   return (
-    <div className='contact'>
+    <div className={contactClassName()}>
+      {showInactive()}
       <h1>{`First Name: ${firstName}`}</h1>
       <p>{`Last Name: ${lastName}`}</p>
       <p>{`Email: ${email}`}</p>
@@ -37,6 +45,9 @@ const Contact = ({
       </button>
       <button onClick={handleEdit}>
         <EditIcon className='workclub-dark-color' />
+      </button>
+      <button onClick={handleStatus}>
+        <AirplanemodeInactiveIcon className='workclub-dark-color' />
       </button>
     </div>
   );
@@ -48,4 +59,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(Contact);
+export default connect(mapStateToProps, {
+  editContactInStore,
+  statusUpdateInStore,
+})(Contact);

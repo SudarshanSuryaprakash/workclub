@@ -80,6 +80,10 @@ footer p {
   outline: none;
 }
 
+.inactive {
+  background-color: grey;
+}
+
 form.create-contact {
   position: relative;
   width: 480px;
