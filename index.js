@@ -10,8 +10,6 @@ const MONGO_URI =
 require('./models/User');
 app.use(cors());
 
-// app.get('/')
-
 app.use(express.json());
 app.use(require('./Routes/auth'));
 

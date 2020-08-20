@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Signup from './Components/user/Signup';
 import Signin from './Components/user/Signin';
 

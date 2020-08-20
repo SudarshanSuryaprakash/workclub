@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -70,16 +70,10 @@ const App = ({
     );
   };
   const handleSignOut = () => {
-    // localStorage.setItem('access', 'denied');
     toggleActive(false);
     return <Redirect to='/' />;
   };
-  {
-    /* <Link to='/'>
-          If you tried Entering through the url area, you need to sign in. Or if
-          you signed out, you need to sign in.
-        </Link> */
-  }
+
   return (
     <React.Fragment>
       {!active ? <Redirect to='/' /> : displayContent()}
