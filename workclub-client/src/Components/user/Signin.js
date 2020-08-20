@@ -9,7 +9,7 @@ const Signin = ({ toggleActive, active }) => {
     email: 'sudarshansprakash@gmail.com',
     password: 'password',
   });
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(null);
 
   const signin = async () => {
     const { email, password } = value;
@@ -28,8 +28,8 @@ const Signin = ({ toggleActive, active }) => {
       setValid(true);
       toggleActive(true);
     } else {
+      setValid(false);
       toggleActive(false);
-      // localStorage.setItem('access', 'denied');
     }
   };
 
@@ -49,7 +49,8 @@ const Signin = ({ toggleActive, active }) => {
         return <Redirect to='/App' />;
       }
     } else {
-      if (!active) return <div>Please enter Valid Credentials.</div>;
+      if (!active && valid === false)
+        return <div>Please enter Valid Credentials.</div>;
     }
   };
 
